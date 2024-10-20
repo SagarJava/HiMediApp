@@ -1,0 +1,43 @@
+.carousel-container {
+    width: 100%;
+    padding: 20px 0;
+  }
+  
+  .carousel-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .carousel-container .carousel-slide {
+    width: 33%; 
+    height: 150px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    background: #ddf5ff;
+    border-radius: 24px;
+    align-items: center;
+  }
+  
+  .carousel-container .swiper  .carousel-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  
+  .carousel-item p {
+    font-size: 0.9rem;
+    color: #333;
+  }
+  .carousel-container .swiper {
+    height: auto;
+  }
+  .carousel-container .swiper .carousel-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }

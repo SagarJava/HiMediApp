@@ -1,0 +1,28 @@
+
+.hospital-overview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.hospital-image {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.hospital-info {
+  text-align: center;
+}
+
+.hospital-info h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.hospital-info p {
+  font-size: 1rem;
+  color: #555;
+}

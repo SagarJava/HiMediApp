@@ -1,0 +1,28 @@
+
+.condition-overview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.condition-image {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.condition-info {
+  text-align: center;
+}
+
+.condition-info h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.condition-info p {
+  font-size: 1rem;
+  color: #555;
+}

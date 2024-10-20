@@ -1,0 +1,17 @@
+
+.address {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.address h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.address p {
+  font-size: 1rem;
+  color: #333;
+}

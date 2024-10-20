@@ -1,0 +1,28 @@
+.department-overview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .department-image {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .department-info {
+    text-align: center;
+  }
+  
+  .department-info h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .department-info p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
