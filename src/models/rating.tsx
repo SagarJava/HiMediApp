@@ -1,4 +1,12 @@
-export interface RatingModel {
+export interface DoctorRatingModel {
+    id: number;
+    rating: number;
+    review: string;    
+    userId: number;
+    doctorId: number;
+  }
+
+  export interface HospitalRatingModel {
     id: number;
     h_id: number;
     d_id: number;
@@ -6,4 +14,5 @@ export interface RatingModel {
     rating: number;
     review: string;
   }
+    
   

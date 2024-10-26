@@ -49,7 +49,6 @@ getDoctorsData();
       <IonContent>
         <DoctorOverview doctorData={doctorData} />
         <Specialties specialties={specialties} />
-        <NeutrisionForm/>
         <Experience experience={experience} />
         <Education education={education} />
         <FAQs faqs={faqs} />

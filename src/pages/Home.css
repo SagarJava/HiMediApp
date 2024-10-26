@@ -1,0 +1,122 @@
+
+.hospitalView{
+    display: ruby-text;
+}
+.image-hospital{
+    width: 70px;
+height: 70px;
+top: 444px;
+left: 24px;
+padding: 9.86px 12px 11px 12px;
+gap: 0px;
+border-radius: 16px 0px 0px 0px;
+opacity: 0px;
+
+}
+.vertical-container {
+    display: ruby-text;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem; /* Optional: adds spacing between items */
+  }
+  .book-con{
+    width: 173px;
+height: 34px;
+top: 26px;
+left: 24px;
+gap: 0px;
+opacity: 0px;
+font-family: Alike;
+font-size: 18px;
+font-weight: 400;
+line-height: 20.61px;
+text-align: left;
+  }
+  .book-con-content{
+    background-color: #4D5FFF;
+    color:#FFFFFF;
+    width: 757px;
+height: 109px;
+top: 546px;
+left: 24px;
+gap: 0px;
+border-radius: 8px 0px 0px 0px;
+opacity: 0px;
+
+  }
+  .blue-background {
+    background-color: #007bff; /* Blue background color */
+    color: white; /* White text color to contrast */
+    height: 100%; /* Ensures the background fills the entire content area */
+  }
+  
+  .page1 {
+    padding: 6px;
+    text-align: center;
+    background-color: #007bff; /* Blue background color */
+    color: white; /* White text color to contrast */
+    height: 100%;
+  }
+  
+  .home-title {
+    font-family: Outfit;
+font-size: 16px;
+font-weight: 600;
+line-height: 20.16px;
+text-align: left;
+
+  }
+  
+  .home-header {
+    width: Hug (309px)px;
+height: Hug (93px)px;
+top: 8px;
+gap: 12px;
+opacity: 0px;
+
+  }
+  .searchBox{
+padding: 16px 18px 16px 18px;
+gap: 10px;
+border-radius: 10px 0px 0px 0px;
+opacity: 0px;
+bottom: 33px;
+  }
+  .hospital-card{
+    width: 70px;
+height: 70px;
+top: 444px;
+left: 106px;
+gap: 0px;
+border-radius: 16px 0px 0px 0px;
+opacity: 0px;
+color:#FFFFFF;
+
+  }
+  .book-cons-img{
+height: 56px;
+top: -4px;
+left: 164px;
+gap: 0px;
+opacity: 0px;
+
+  }
+  .book-cons-bg{
+    background-color: #007bff; /* Blue background color */
+    color: white; /* White text color to contrast */
+    height: 100%; 
+  }
+  .surgery-card{
+    width: 22.31px;
+height: 31.35px;
+top: 12px;
+left: 26.79px;
+gap: 0px;
+opacity: 0px;
+background: #66D5FF;
+
+  }
+  .nearby-hosp{
+  
+
+  }

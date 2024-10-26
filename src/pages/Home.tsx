@@ -1,63 +1,198 @@
+
+import React, { useEffect, useState } from 'react';
 import {
   IonContent,
   IonHeader,
   IonPage,
   IonTitle,
   IonToolbar,
-  IonList,
-  // IonButton,
-} from "@ionic/react";
+  IonSearchbar,
+  IonCard,
+  IonCardContent,
+  IonItem,
+  IonBreadcrumb,
+  IonImg,
+  IonRouterLink,
+  IonList
+} from '@ionic/react';
+import { useHistory } from 'react-router';
+import { fetchHoisptal, fetchHoisptalById } from '../services/hospitalApi';
+import { fetchHospitalDoctorById } from '../services/hospitalDoctorApi';
+import { useParams } from 'react-router';
+import { IonReactRouter } from "@ionic/react-router";
+import { DoctorModel } from '../models/doctor';
+import { HospitalModel } from '../models/hospital';
+import { SearchModel } from '../models/search';
+import { SurgeryModel } from '../models/surgery';
+import { fetchDoctor } from '../services/doctorApi';
+import { fetchSearchHoisptals, fetchSearchSurgerys, fetchSearchDoctors } from '../services/searchApi';
+import { fetchSurgery } from '../services/surgeryApi';
+import {
+  IonIcon,
+  IonLabel,
+  IonAvatar,
+  IonBadge,
+  IonChip,
+} from '@ionic/react';
+import { person, star, medkit, heart, fitness } from 'ionicons/icons';
 
-import HomeSlider from "../components/home/HomeSlider";
-import Carousel from "../components/home/IconListComponent";
-import { useHistory } from "react-router";
-
-const services = [
-  { icon: "images/services-doctor.png", text: "Doctor Consultation"},
-  { icon: "images/services-second-opinion.png", text: "Second Opinion" },
-  { icon: "images/services-medical-loan.png", text: "Medical Loan" },
-  { icon: "images/services-doctor.png", text: "Doctor Consultation" },
-  { icon: "images/services-second-opinion.png", text: "Second Opinion" },
-  { icon: "images/services-medical-loan.png", text: "Medical Loan" },
-];
-const conditions = [
-  { icon: "images/hernia-icon.png", text: "Hernia" },
-  { icon: "images/IVF.png", text: "IVF" },
-  { icon: "images/TKR.png", text: "TKR" },
-  { icon: "images/hernia-icon.png", text: "Hernia" },
-  { icon: "images/IVF.png", text: "IVF" },
-  { icon: "images/TKR.png", text: "TKR" },
-];
-
-const treatments = [
-  { icon: "images/hernia-icon.png", text: "Hernia" },
-  { icon: "images/IVF.png", text: "IVF" },
-  { icon: "images/TKR.png", text: "TKR" },
-  { icon: "images/hernia-icon.png", text: "Hernia" },
-  { icon: "images/IVF.png", text: "IVF" },
-  { icon: "images/TKR.png", text: "TKR" },
-];
-
-const Home: React.FC = () => { 
+const Home: React.FC = () => {
+  const [searchText, setSearchText] = useState("");
+  // Filtered services based on search text
+  const [filteredServices, setFilteredServices] = useState<any[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [filteredSurgeryServices, setFilteredSurgeryServices] = useState<SearchModel[]>([]);
+  const [filteredHospitalServices, setFilteredHospitalServices] = useState<SearchModel[]>([]);
+  const [filteredDoctorsServices, setFilteredDoctorsServices] = useState<SearchModel[]>([]);
+  const [hospitalsData, setHospital] = useState<HospitalModel[]>([]);
+  const [surgerysData, setSurgerys] = useState<SurgeryModel[]>([]);
+  const [doctorsData, setDoctors] = useState<DoctorModel[]>([]);
+  const { id }: any = useParams();
+  useEffect(() => {
+    const getAllSearchData = async () => {
+      let hospitalSearchData = await fetchSearchHoisptals();
+      let surgerySearchData = await fetchSearchSurgerys();
+      let doctorSearchData = await fetchSearchDoctors();
+      setFilteredHospitalServices(hospitalSearchData);
+      setFilteredDoctorsServices(doctorSearchData);
+      setFilteredSurgeryServices(surgerySearchData);
+      let hospitalApiData: HospitalModel[] = await fetchHoisptal();
+      let surgeryApiData: SurgeryModel[]=await fetchSurgery();
+      let doctorApiData: DoctorModel[]=await fetchDoctor();
+      if (hospitalApiData.length)
+        setHospital(hospitalApiData);
+      setSurgerys(surgeryApiData);
+      setDoctors(doctorApiData);
+    }
+    getAllSearchData()
+  }, []
+  );
   const history = useHistory();
   const redirectTOOurServices = async (ourServiceId: String) => {
     history.push(`/doctor/${ourServiceId}`);
   };
-   return (
-    <IonPage style={{marginTop: "36px"}}>
+  return (
+    <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Home</IonTitle>
+          <IonTitle>Hi, Abhi</IonTitle>
+          <IonIcon slot="end" icon={person} className="ion-padding-end" />
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-      <HomeSlider></HomeSlider>
-              <Carousel title="Our Services" items={services} />
-              <Carousel title="Conditions" items={conditions} />
-              <Carousel title="Treatments" items={treatments} />
-        <IonList>
-        </IonList>
+      <IonContent className="ion-padding">
+        <IonSearchbar placeholder="Search hospitals or treatment"
+        value={searchText}
+        onIonInput={(e) => {
+          if (e.detail.value === "") {
+            setSearchText("");
+            setFilteredServices([]);
+          } else {
+            setSearchText(e.detail.value!);
+            const servicesSearch = [...filteredHospitalServices, ...filteredSurgeryServices, ...filteredDoctorsServices];
+            setFilteredServices(servicesSearch);
+          }
+        }}
+        ></IonSearchbar>
+        {filteredServices.length > 0 &&
+            filteredServices.map((service) => (
+              <IonItem key={service.id}>
+                <a
+                  className="serachLink"
+                  href={service.href + "/" + service.id}
+                >
+                  {service.name}
+                </a>
+              </IonItem>
+            ))}
+        <div className="recent-searches ion-margin-bottom">
+          <h2 className="ion-margin-bottom">Recent Searches</h2>
+          <IonChip>Cardiology</IonChip>
+          <IonChip>Orthopedics</IonChip>
+          <IonChip>Neurology</IonChip>
+        </div>
+        
+        <div className="popular-hospitals ion-margin-bottom">
+          <h2 className="ion-margin-bottom">Popular Hospitals Near You</h2>
+          <IonList>
+          {hospitalsData.length > 0 &&
+            hospitalsData.map((hospital) => (
+
+            <IonItem>
+              <IonAvatar slot="start">
+                <img src={hospital?.image} alt="Apollo Hospital" />
+              </IonAvatar>
+              <IonRouterLink
+                  className="searchLink"
+                  href={`/hospital/${hospital.hospital_id}`}
+                >
+              <IonLabel>
+                <h2>{hospital?.hospital_name}</h2>
+                <p>2.5 km away</p>
+              </IonLabel>
+              </IonRouterLink>
+              <IonBadge color="primary" slot="end">4.5 <IonIcon icon={star} /></IonBadge>
+            </IonItem>
+             ))}
+          </IonList>
+        </div>
+        
+        <IonCard color="primary" className="ion-margin-bottom">
+          <IonCardContent>
+            <h2>Book a Free Consultation with Us</h2>
+            <p>Get Started</p>
+          </IonCardContent>
+        </IonCard>
+        
+        <div className="explore-categories ion-margin-bottom">
+          <h2 className="ion-margin-bottom">Explore Categories</h2>
+          <IonList>
+          {surgerysData.length > 0 &&
+            surgerysData.map((surgery) => (
+            <IonItem>
+              <IonRouterLink
+                  className="searchLink"
+                  href={`/surgery/${surgery.surgery_id}`}
+                >
+              <IonIcon icon={heart} slot="start" color="danger" />
+              <IonLabel>{surgery.surgery_name}</IonLabel>
+              </IonRouterLink>
+            </IonItem>
+             ))}
+          </IonList>
+        </div>
+        
+        <div className="explore-doctors ion-margin-bottom">
+          <h2 className="ion-margin-bottom">Explore by Doctors</h2>
+          <IonList className="hospitalView">
+          {doctorsData.length > 0 &&
+            doctorsData.map((doctor) => (
+            <IonItem>
+              <IonAvatar slot="start">
+                <img src={doctor?.image} alt="Dr. Joseph K" />
+              </IonAvatar>
+              <IonRouterLink
+                  className="searchLink"
+                  href={`/doctor/${doctor.doctor_id}`}
+                >
+              <IonLabel>
+                <h2>{doctor.doctor_name}</h2>
+                <p>{doctor.doctor_specialization}</p>
+              </IonLabel>
+              </IonRouterLink>
+              <IonBadge color="success" slot="end">Available</IonBadge>
+            </IonItem>))}
+          </IonList>
+        </div>
+        
+        <IonCard color="primary">
+          <IonCardContent>
+            <h3>Dr. Joseph K</h3>
+            <p>General Consultation</p>
+            <p>Book Appointment</p>
+          </IonCardContent>
+        </IonCard>
       </IonContent>
+      
     </IonPage>
   );
 };

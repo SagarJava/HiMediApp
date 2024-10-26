@@ -1,4 +1,6 @@
 import { Redirect, Route } from "react-router-dom";
+import { calendar, chatbubble, water } from 'ionicons/icons';
+
 import {
   IonApp,
   IonRouterOutlet,
@@ -170,10 +172,18 @@ getAllSearchData()
               <IonIcon aria-hidden="true" icon={home} />
               <IonLabel>Home</IonLabel>
             </IonTabButton>
-            <IonTabButton tab="tab2" href="/callus">
-              <IonIcon aria-hidden="true" icon={call} />
-              <IonLabel>Call</IonLabel>
-            </IonTabButton>
+            <IonTabButton tab="appointments" href="/appointments">
+          <IonIcon icon={calendar} />
+          <IonLabel>Appointments</IonLabel>
+        </IonTabButton>
+        <IonTabButton tab="consult" href="/consult">
+          <IonIcon icon={chatbubble} />
+          <IonLabel>Consult</IonLabel>
+        </IonTabButton>
+        <IonTabButton tab="blood" href="/blood">
+          <IonIcon icon={water} />
+          <IonLabel>Blood</IonLabel>
+        </IonTabButton>
             <IonTabButton tab="tab3" href="/profile">
               <IonIcon aria-hidden="true" icon={personCircle} />
               <IonLabel>profile</IonLabel>

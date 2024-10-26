@@ -7,5 +7,6 @@ export interface SurgeryModel {
     benefits: string;
     procedureSteps: string;
     risks: string;
+    image: string;
   }
   
