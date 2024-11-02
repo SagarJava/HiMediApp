@@ -2,8 +2,9 @@ export interface DoctorRatingModel {
     id: number;
     rating: number;
     review: string;    
-    userId: number;
-    doctorId: number;
+    userid: number;
+    doctorid: number;
+    hospitalid: number;
   }
 
   export interface HospitalRatingModel {

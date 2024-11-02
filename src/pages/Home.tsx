@@ -22,10 +22,10 @@ import { useParams } from 'react-router';
 import { IonReactRouter } from "@ionic/react-router";
 import { DoctorModel } from '../models/doctor';
 import { HospitalModel } from '../models/hospital';
-import { SearchModel } from '../models/search';
+import { SearchModel, SearchQueryModel } from '../models/search';
 import { SurgeryModel } from '../models/surgery';
 import { fetchDoctor } from '../services/doctorApi';
-import { fetchSearchHoisptals, fetchSearchSurgerys, fetchSearchDoctors } from '../services/searchApi';
+import { fetchSearchHoisptals, fetchSearchSurgerys, fetchSearchDoctors, advanceSearch } from '../services/searchApi';
 import { fetchSurgery } from '../services/surgeryApi';
 import {
   IonIcon,
@@ -35,7 +35,6 @@ import {
   IonChip,
 } from '@ionic/react';
 import { person, star, medkit, heart, fitness } from 'ionicons/icons';
-
 const Home: React.FC = () => {
   const [searchText, setSearchText] = useState("");
   // Filtered services based on search text
@@ -47,9 +46,33 @@ const Home: React.FC = () => {
   const [hospitalsData, setHospital] = useState<HospitalModel[]>([]);
   const [surgerysData, setSurgerys] = useState<SurgeryModel[]>([]);
   const [doctorsData, setDoctors] = useState<DoctorModel[]>([]);
+  const [searchParams, setSearchParams] = useState({ /* initial search parameters */ });
   const { id }: any = useParams();
   useEffect(() => {
     const getAllSearchData = async () => {
+      //advance search 
+      const controller = new AbortController();
+      const { signal } = controller;
+      const searchParamsReq: Partial<SearchQueryModel> = {
+        rating: {
+          minimum: 4,
+          maximum: 5,
+        },
+        // location: "New York",
+        specialization: "cancer",
+        price: {
+          minimum: 500,
+          maximum: 50000,
+        },
+        // hospitalType: HospitalType.HIGH,
+        // insurance: "Aetna",
+        // sortBy: SortType.ASC,
+      };
+      setSearchParams(searchParamsReq
+        )
+      const data = await advanceSearch(searchParamsReq, signal);
+
+
       let hospitalSearchData = await fetchSearchHoisptals();
       let surgerySearchData = await fetchSearchSurgerys();
       let doctorSearchData = await fetchSearchDoctors();
@@ -106,9 +129,9 @@ const Home: React.FC = () => {
             ))}
         <div className="recent-searches ion-margin-bottom">
           <h2 className="ion-margin-bottom">Recent Searches</h2>
-          <IonChip>Cardiology</IonChip>
-          <IonChip>Orthopedics</IonChip>
-          <IonChip>Neurology</IonChip>
+          <IonChip>Filter</IonChip>
+          <IonChip>Nearest</IonChip>
+          <IonChip>SortBy</IonChip>
         </div>
         
         <div className="popular-hospitals ion-margin-bottom">
@@ -190,6 +213,13 @@ const Home: React.FC = () => {
             <p>General Consultation</p>
             <p>Book Appointment</p>
           </IonCardContent>
+          <IonRouterLink
+                  href={`/ratingPage`}
+                >
+              <IonLabel>
+                <h2>RateDoctor</h2>
+              </IonLabel>
+              </IonRouterLink>
         </IonCard>
       </IonContent>
       

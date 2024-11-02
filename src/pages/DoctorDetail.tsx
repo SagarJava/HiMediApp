@@ -1,11 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { IonContent, IonPage } from '@ionic/react';
-import DoctorOverview from '../components/doctors/DoctorOverview';
-import Specialties from '../components/doctors/Specialties';
-import Experience from '../components/doctors/Experience';
-import Education from '../components/doctors/Education';
-import FAQs from '../components/doctors/FAQs';
+import DoctorOverview from '../../../doctors/DoctorOverview';
+import Specialties from '../../../doctors/Specialties';
+import Experience from '../../../doctors/Experience';
+import Education from '../../../doctors/Education';
+import FAQs from '../../../doctors/FAQs';
 import { useParams } from 'react-router';
 import { DoctorModel } from '../models/doctor';
 import { fetchDoctorById } from '../services/doctorApi';

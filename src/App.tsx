@@ -69,6 +69,8 @@ import { useEffect, useState } from "react";
 import ProfileMenu from "./components/common/ProfileMenu/ProfileMenu";
 import { SearchModel } from "./models/search";
 import { fetchSearchDoctors, fetchSearchHoisptals, fetchSearchSurgerys } from "./services/searchApi";
+import RatingPage from "./pages/ratingPage";
+import SearchPage from "./pages/SearchPage";
 setupIonicReact();
 const App: React.FC = () => {
   const [searchText, setSearchText] = useState("");
@@ -165,6 +167,12 @@ getAllSearchData()
             </Route>
             <Route exact path="/">
               <LandingPage />
+            </Route>
+            <Route exact path="/ratingPage/:id">
+              <RatingPage />
+            </Route>
+            <Route exact path="/search">
+              <SearchPage />
             </Route>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
